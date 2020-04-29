@@ -9,6 +9,15 @@
 import Foundation
 import WebKit
 
+#if os(OSX)
+    import AppKit
+    typealias View = NSView
+#elseif os(iOS)
+    import UIKit
+    typealias View = UIView
+#endif
+
+
 // MARK: CodeMirrorWebViewDelegate
 
 protocol CodeMirrorWebViewDelegate: class {
@@ -35,7 +44,7 @@ private struct JavascriptFunction {
 
 // MARK: CodeMirrorWebView
 
-final class CodeMirrorWebView: NSView {
+final class CodeMirrorWebView: View {
 
     private struct Constants {
         static let codeMirrorDidReady = "codeMirrorDidReady"
