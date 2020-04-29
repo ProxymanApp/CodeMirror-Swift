@@ -11,6 +11,7 @@ It's powered the Request/Response Body Previewer of [Proxyman](https://github.co
 ## Features
 - 🍭 Lightweight CodeMirror wrapper (build 5.52.2)
 - ✅ 100% Native Swift and WKWebView
+- 👑 Support iOS & macOS
 - 🎧 Built-in addons
 - 🔎 Customiziable (Addon, Themes, Modes...)
 - 📕 Dozen built-in themes and syntax highlight modes
