@@ -9,12 +9,16 @@
 import Foundation
 import WebKit
 
+// MARK: CodeMirrorWebViewDelegate
+
 protocol CodeMirrorWebViewDelegate: class {
 
     func codeMirrorViewDidLoadSuccess(_ sender: CodeMirrorWebView)
     func codeMirrorViewDidLoadError(_ sender: CodeMirrorWebView, error: Error)
     func codeMirrorViewDidChangeContent(_ sender: CodeMirrorWebView, content: String)
 }
+
+// MARK: JavascriptFunction
 
 // JS Func
 typealias JavascriptCallback = (Result<Any?, Error>) -> Void
@@ -28,6 +32,8 @@ private struct JavascriptFunction {
         self.callback = callback
     }
 }
+
+// MARK: CodeMirrorWebView
 
 final class CodeMirrorWebView: NSView {
 
@@ -62,11 +68,13 @@ final class CodeMirrorWebView: NSView {
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         initWebView()
+        configCodeMirror()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         initWebView()
+        configCodeMirror()
     }
 
     // MARK: Properties
@@ -147,8 +155,7 @@ extension CodeMirrorWebView {
         webview.load(data, mimeType: "text/html", characterEncodingName: "utf-8", baseURL: bundle.resourceURL!)
     }
 
-    private func setupWebView() {
-        webview.enclosingScrollView?.verticalScrollElasticity = .none
+    private func configCodeMirror() {
         setTabInsertsSpaces(true)
     }
 
@@ -210,7 +217,6 @@ extension CodeMirrorWebView: WKScriptMessageHandler {
         // is Ready
         if message.name == Constants.codeMirrorDidReady {
             pageLoaded = true
-            setupWebView()
             callPendingFunctions()
             return
         }
