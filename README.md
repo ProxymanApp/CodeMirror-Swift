@@ -13,6 +13,7 @@ It's powered the Request/Response Body Previewer of [Proxyman](https://github.co
 - ✅ 100% Native Swift and WKWebView
 - 🎧 Built-in addons
 - 🔎 Customiziable (Addon, Themes, Modes...)
+- 📕 Dozen built-in themes and syntax highlight modes
 - ⚡️ Ready to go
 
 ## How to use?
