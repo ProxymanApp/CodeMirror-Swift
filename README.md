@@ -44,4 +44,4 @@ codeMirrorView.setContent(content)
 
 ## License
 
-CodeMirror-Swift is copyright 2020 Proxyman and available under RMIT license. See the LICENSE file in the project for more information.
+CodeMirror-Swift is copyright 2020 Proxyman and available under MIT license. See the LICENSE file in the project for more information.
