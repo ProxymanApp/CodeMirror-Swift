@@ -6,11 +6,9 @@
 
 CodeMirror-Swift is a lightweight wrapper of CodeMirror for macOS and iOS. 
 
-It's powered the Request/Response Body Previewer of [Proxyman](https://github.com/ProxymanApp/Proxyman) 
-
 ## Features
 - 🍭 Lightweight CodeMirror wrapper (build 5.52.2)
-- ✅ 100% Native Swift and WKWebView
+- ✅ 100% Native Swift 5 and modern WKWebView
 - 👑 Support iOS & macOS
 - 🎧 Built-in addons
 - 🔎 Customiziable (Addon, Themes, Modes...)
