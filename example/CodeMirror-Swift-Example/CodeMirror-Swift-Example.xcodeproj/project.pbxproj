@@ -11,6 +11,8 @@
 		BA02F90B24595D2A0004A0F3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA02F90A24595D2A0004A0F3 /* ViewController.swift */; };
 		BA02F90D24595D2B0004A0F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA02F90C24595D2B0004A0F3 /* Assets.xcassets */; };
 		BA02F91024595D2B0004A0F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA02F90E24595D2B0004A0F3 /* Main.storyboard */; };
+		BA02F91D24595FE50004A0F3 /* CodeMirrorWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA02F91A24595FE50004A0F3 /* CodeMirrorWebView.swift */; };
+		BA02F91E24595FE50004A0F3 /* CodeMirrorView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BA02F91B24595FE50004A0F3 /* CodeMirrorView.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +23,8 @@
 		BA02F90F24595D2B0004A0F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BA02F91124595D2B0004A0F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA02F91224595D2B0004A0F3 /* CodeMirror_Swift_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CodeMirror_Swift_Example.entitlements; sourceTree = "<group>"; };
+		BA02F91A24595FE50004A0F3 /* CodeMirrorWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeMirrorWebView.swift; sourceTree = "<group>"; };
+		BA02F91B24595FE50004A0F3 /* CodeMirrorView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CodeMirrorView.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +57,7 @@
 		BA02F90724595D2A0004A0F3 /* CodeMirror-Swift-Example */ = {
 			isa = PBXGroup;
 			children = (
+				BA02F91924595FE50004A0F3 /* src */,
 				BA02F90824595D2A0004A0F3 /* AppDelegate.swift */,
 				BA02F90A24595D2A0004A0F3 /* ViewController.swift */,
 				BA02F90C24595D2B0004A0F3 /* Assets.xcassets */,
@@ -61,6 +66,16 @@
 				BA02F91224595D2B0004A0F3 /* CodeMirror_Swift_Example.entitlements */,
 			);
 			path = "CodeMirror-Swift-Example";
+			sourceTree = "<group>";
+		};
+		BA02F91924595FE50004A0F3 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				BA02F91A24595FE50004A0F3 /* CodeMirrorWebView.swift */,
+				BA02F91B24595FE50004A0F3 /* CodeMirrorView.bundle */,
+			);
+			name = src;
+			path = ../../../src;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -123,6 +138,7 @@
 			files = (
 				BA02F90D24595D2B0004A0F3 /* Assets.xcassets in Resources */,
 				BA02F91024595D2B0004A0F3 /* Main.storyboard in Resources */,
+				BA02F91E24595FE50004A0F3 /* CodeMirrorView.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA02F90B24595D2A0004A0F3 /* ViewController.swift in Sources */,
+				BA02F91D24595FE50004A0F3 /* CodeMirrorWebView.swift in Sources */,
 				BA02F90924595D2A0004A0F3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
