@@ -11,7 +11,7 @@ CodeMirror-Swift is a lightweight wrapper of CodeMirror for macOS and iOS.
 - ✅ 100% Native Swift 5 and modern WKWebView
 - 👑 Support iOS & macOS
 - 🎧 Built-in addons
-- 🔎 Customiziable (Addon, Themes, Modes...)
+- 🔎 Customizable (Addon, Themes, Modes...)
 - 📕 Dozen built-in themes and syntax highlight modes
 - ⚡️ Ready to go
 
