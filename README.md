@@ -26,7 +26,7 @@ codeMirrorView.setMimeType("application/json")
 codeMirrorView.setContent(content)
 ```
 
-## Exmaple
+## Example
 - Run `CodeMirror-Swift-Example.xcodeproj`
 
 ## How to use addons?
