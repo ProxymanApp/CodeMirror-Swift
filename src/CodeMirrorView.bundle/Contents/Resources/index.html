@@ -134,10 +134,14 @@
         return CodeMirror.keyMap["basic"]["Tab"] == "defaultTab";
       }
 
+      function getStringFromHex(content) {
+          return decodeURIComponent(content.replace(/\s+/g, '').replace(/[0-9a-f]{2}/g, '%$&'));
+      }
+
       function SetContent(content) {
-        editor.doc.setValue(content);
-        editor.doc.clearHistory();
-        editor.doc.markClean();
+          // Convert hex utf8 -> utf8 string
+          var text = getStringFromHex(content);
+          editor.doc.setValue(text);
       }
 
       function GetContent() {

@@ -17,6 +17,11 @@ import WebKit
     typealias View = UIView
 #endif
 
+private extension Data {
+    func hexEncodedString() -> String {
+        return map { String(format: "%02hhx", $0) }.joined()
+    }
+}
 
 // MARK: CodeMirrorWebViewDelegate
 
@@ -93,19 +98,12 @@ final class CodeMirrorWebView: View {
     }
 
     func setContent(_ value: String) {
-        //
-        // It's tricky to pass FULL JSON or HTML text with \n or "", ... into JS Bridge
-        // Have to wrap with `data_here`
-        // And use String.raw to prevent escape some special string -> String will show exactly how it's
-        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
-        //
-        let first = "var content = String.raw`"
-        let content = """
-\(value)
-"""
-        let end = "`; SetContent(content);"
-        let script = first + content + end
-        callJavascript(javascriptString: script)
+        if let hexString = value.data(using: .utf8)?.hexEncodedString() {
+            let script = """
+            var content = "\(hexString)"; SetContent(content);
+            """
+            callJavascript(javascriptString: script)
+        }
     }
 
     func getContent(_ block: JavascriptCallback?) {
