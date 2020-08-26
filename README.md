@@ -15,6 +15,12 @@ CodeMirror-Swift is a lightweight wrapper of CodeMirror for macOS and iOS.
 - 📕 Dozen built-in themes and syntax highlight modes
 - ⚡️ Ready to go
 
+## Apps that uses CodeMirror-Swift
+
+<img src="https://raw.githubusercontent.com/ProxymanApp/Proxyman/master/screenshots/proxyman_logo.png" alt="Proxyman screenshot" width="50%" height="auto"/>
+
+#### Modern and Delightful HTTP Debugging Proxy for macOS, iOS and Android ⚡️ • 🌎 https://proxyman.io
+
 ## How to use?
 1. Manually integrate `CodeMirrorWebView.swift` and `CodeMirrorView.bundle` to your project.
 2. Customize to fit your need on `index.html`
