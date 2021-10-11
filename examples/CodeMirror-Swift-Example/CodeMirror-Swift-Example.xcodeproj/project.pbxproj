@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,9 +11,8 @@
 		BA02F90B24595D2A0004A0F3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA02F90A24595D2A0004A0F3 /* ViewController.swift */; };
 		BA02F90D24595D2B0004A0F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA02F90C24595D2B0004A0F3 /* Assets.xcassets */; };
 		BA02F91024595D2B0004A0F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA02F90E24595D2B0004A0F3 /* Main.storyboard */; };
-		BA02F91D24595FE50004A0F3 /* CodeMirrorWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA02F91A24595FE50004A0F3 /* CodeMirrorWebView.swift */; };
-		BA02F91E24595FE50004A0F3 /* CodeMirrorView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BA02F91B24595FE50004A0F3 /* CodeMirrorView.bundle */; };
 		BA02F921245968D90004A0F3 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = BA02F920245968D90004A0F3 /* data.json */; };
+		D69306D4271401CC0007FEB4 /* CodeMirror in Frameworks */ = {isa = PBXBuildFile; productRef = D69306D3271401CC0007FEB4 /* CodeMirror */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,9 +23,8 @@
 		BA02F90F24595D2B0004A0F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BA02F91124595D2B0004A0F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA02F91224595D2B0004A0F3 /* CodeMirror_Swift_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CodeMirror_Swift_Example.entitlements; sourceTree = "<group>"; };
-		BA02F91A24595FE50004A0F3 /* CodeMirrorWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeMirrorWebView.swift; sourceTree = "<group>"; };
-		BA02F91B24595FE50004A0F3 /* CodeMirrorView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CodeMirrorView.bundle; sourceTree = "<group>"; };
 		BA02F920245968D90004A0F3 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
+		D69306D1271401600007FEB4 /* CodeMirror-Swift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "CodeMirror-Swift"; path = ../..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D69306D4271401CC0007FEB4 /* CodeMirror in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,8 +42,10 @@
 		BA02F8FC24595D2A0004A0F3 = {
 			isa = PBXGroup;
 			children = (
+				D69306D1271401600007FEB4 /* CodeMirror-Swift */,
 				BA02F90724595D2A0004A0F3 /* CodeMirror-Swift-Example */,
 				BA02F90624595D2A0004A0F3 /* Products */,
+				D69306D2271401CC0007FEB4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,7 +60,6 @@
 		BA02F90724595D2A0004A0F3 /* CodeMirror-Swift-Example */ = {
 			isa = PBXGroup;
 			children = (
-				BA02F91924595FE50004A0F3 /* src */,
 				BA02F90824595D2A0004A0F3 /* AppDelegate.swift */,
 				BA02F90A24595D2A0004A0F3 /* ViewController.swift */,
 				BA02F920245968D90004A0F3 /* data.json */,
@@ -71,14 +71,11 @@
 			path = "CodeMirror-Swift-Example";
 			sourceTree = "<group>";
 		};
-		BA02F91924595FE50004A0F3 /* src */ = {
+		D69306D2271401CC0007FEB4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BA02F91A24595FE50004A0F3 /* CodeMirrorWebView.swift */,
-				BA02F91B24595FE50004A0F3 /* CodeMirrorView.bundle */,
 			);
-			name = src;
-			path = ../../../src;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -97,6 +94,9 @@
 			dependencies = (
 			);
 			name = "CodeMirror-Swift-Example";
+			packageProductDependencies = (
+				D69306D3271401CC0007FEB4 /* CodeMirror */,
+			);
 			productName = "CodeMirror-Swift-Example";
 			productReference = BA02F90524595D2A0004A0F3 /* CodeMirror-Swift-Example.app */;
 			productType = "com.apple.product-type.application";
@@ -108,7 +108,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1300;
 				ORGANIZATIONNAME = "Nghia Tran";
 				TargetAttributes = {
 					BA02F90424595D2A0004A0F3 = {
@@ -141,7 +141,6 @@
 			files = (
 				BA02F90D24595D2B0004A0F3 /* Assets.xcassets in Resources */,
 				BA02F91024595D2B0004A0F3 /* Main.storyboard in Resources */,
-				BA02F91E24595FE50004A0F3 /* CodeMirrorView.bundle in Resources */,
 				BA02F921245968D90004A0F3 /* data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -154,7 +153,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA02F90B24595D2A0004A0F3 /* ViewController.swift in Sources */,
-				BA02F91D24595FE50004A0F3 /* CodeMirrorWebView.swift in Sources */,
 				BA02F90924595D2A0004A0F3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,6 +197,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -259,6 +258,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -291,6 +291,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "CodeMirror-Swift-Example/CodeMirror_Swift_Example.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
@@ -311,6 +312,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "CodeMirror-Swift-Example/CodeMirror_Swift_Example.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
@@ -348,6 +350,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D69306D3271401CC0007FEB4 /* CodeMirror */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CodeMirror;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BA02F8FD24595D2A0004A0F3 /* Project object */;
 }
