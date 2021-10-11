@@ -21,8 +21,13 @@ CodeMirror-Swift is a lightweight wrapper of CodeMirror for macOS and iOS.
 
 #### Modern and Delightful HTTP Debugging Proxy for macOS, iOS and Android ⚡️ • 🌎 https://proxyman.io
 
-## How to use?
-1. Manually integrate `CodeMirrorWebView.swift` and `CodeMirrorView.bundle` to your project.
+## Installation
+
+### SPM
+The easiest way to use this package is to add `https://github.com/ProxymanApp/CodeMirror-Swift` to your SPM dependency. 
+
+### Manually
+1. Manually copy `CodeMirrorWebView.swift` and `CodeMirrorView.bundle` to your project.
 2. Customize to fit your need on `index.html`
 3. Set `mode` and `Content`
 ```swift
@@ -33,14 +38,14 @@ codeMirrorView.setContent(content)
 ```
 
 ## Example
-- Run `CodeMirror-Swift-Example.xcodeproj`
+- Run `./examples/CodeMirror-Swift-Example.xcodeproj`
 
 ## How to use addons?
 1. Read [CodeMirror Documentation](https://codemirror.net)
 2. Enable your plugins in `index.html`
 
 ## How to add new themes?
-1. Download CodeMirrror themes and put it on the folder `src/CodeMirrorView.bundle/Contents/Resources/theme`
+1. Download CodeMirrror themes and put it on the folder `Sources/CodeMirrorView.bundle/Contents/Resources/theme`
 2. Load your theme in `index.html`
 3. Change by using `codeMirrorView.setThemeName("material.css")`
 
