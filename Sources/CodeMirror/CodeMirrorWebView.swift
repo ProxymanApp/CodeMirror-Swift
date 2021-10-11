@@ -11,21 +11,21 @@ import WebKit
 
 #if os(OSX)
     import AppKit
-    typealias View = NSView
+    public typealias NativeView = NSView
 #elseif os(iOS)
     import UIKit
-    typealias View = UIView
+    public typealias NativeView = UIView
 #endif
 
 private extension Data {
     func hexEncodedString() -> String {
-        return map { String(format: "%02hhx", $0) }.joined()
+        map { String(format: "%02hhx", $0) }.joined()
     }
 }
 
 // MARK: CodeMirrorWebViewDelegate
 
-protocol CodeMirrorWebViewDelegate: class {
+public protocol CodeMirrorWebViewDelegate: AnyObject {
 
     func codeMirrorViewDidLoadSuccess(_ sender: CodeMirrorWebView)
     func codeMirrorViewDidLoadError(_ sender: CodeMirrorWebView, error: Error)
@@ -35,7 +35,7 @@ protocol CodeMirrorWebViewDelegate: class {
 // MARK: JavascriptFunction
 
 // JS Func
-typealias JavascriptCallback = (Result<Any?, Error>) -> Void
+public typealias JavascriptCallback = (Result<Any?, Error>) -> Void
 private struct JavascriptFunction {
 
     let functionString: String
@@ -49,7 +49,7 @@ private struct JavascriptFunction {
 
 // MARK: CodeMirrorWebView
 
-final class CodeMirrorWebView: View {
+public final class CodeMirrorWebView: NativeView {
 
     private struct Constants {
         static let codeMirrorDidReady = "codeMirrorDidReady"
@@ -58,7 +58,7 @@ final class CodeMirrorWebView: View {
 
     // MARK: Variables
 
-    weak var delegate: CodeMirrorWebViewDelegate?
+    public weak var delegate: CodeMirrorWebViewDelegate?
     private lazy var webview: WKWebView = {
         let preferences = WKPreferences()
         preferences.javaScriptEnabled = true
@@ -93,11 +93,11 @@ final class CodeMirrorWebView: View {
 
     // MARK: Properties
 
-    func setTabInsertsSpaces(_ value: Bool) {
+    public func setTabInsertsSpaces(_ value: Bool) {
         callJavascript(javascriptString: "SetTabInsertSpaces(\(value));")
     }
 
-    func setContent(_ value: String) {
+    public func setContent(_ value: String) {
         if let hexString = value.data(using: .utf8)?.hexEncodedString() {
             let script = """
             var content = "\(hexString)"; SetContent(content);
@@ -106,35 +106,35 @@ final class CodeMirrorWebView: View {
         }
     }
 
-    func getContent(_ block: JavascriptCallback?) {
+    public func getContent(_ block: JavascriptCallback?) {
         callJavascript(javascriptString: "GetContent();", callback: block)
     }
 
-    func setMimeType(_ value: String) {
+    public func setMimeType(_ value: String) {
         callJavascript(javascriptString: "SetMimeType(\"\(value)\");")
     }
 
-    func setThemeName(_ value: Bool) {
+    public func setThemeName(_ value: Bool) {
         callJavascript(javascriptString: "SetTheme(\"\(value)\");")
     }
 
-    func setLineWrapping(_ value: Bool) {
+    public func setLineWrapping(_ value: Bool) {
         callJavascript(javascriptString: "SetLineWrapping(\(value));")
     }
 
-    func setFontSize(_ value: Int) {
+    public func setFontSize(_ value: Int) {
         callJavascript(javascriptString: "SetFontSize(\(value));")
     }
 
-    func setDefaultTheme() {
+    public func setDefaultTheme() {
         setMimeType("application/json")
     }
 
-    func setReadonly(_ value: Bool) {
+    public func setReadonly(_ value: Bool) {
         callJavascript(javascriptString: "SetReadOnly(\(value));")
     }
 
-    func getTextSelection(_ block: JavascriptCallback?) {
+    public func getTextSelection(_ block: JavascriptCallback?) {
         callJavascript(javascriptString: "GetTextSelection();", callback: block)
     }
 }
@@ -153,7 +153,8 @@ extension CodeMirrorWebView {
         webview.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 
         // Load CodeMirror bundle
-        guard let bundlePath = Bundle.main.path(forResource: "CodeMirrorView", ofType: "bundle"),
+        
+        guard let bundlePath = Bundle.module.path(forResource: "CodeMirrorView", ofType: "bundle"),
             let bundle = Bundle(path: bundlePath),
             let indexPath = bundle.path(forResource: "index", ofType: "html") else {
                 fatalError("CodeMirrorBundle is missing")
@@ -201,16 +202,15 @@ extension CodeMirrorWebView {
 // MARK: WKNavigationDelegate
 
 extension CodeMirrorWebView: WKNavigationDelegate {
-
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         delegate?.codeMirrorViewDidLoadSuccess(self)
     }
 
-    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         delegate?.codeMirrorViewDidLoadError(self, error: error)
     }
 
-    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+    public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         delegate?.codeMirrorViewDidLoadError(self, error: error)
     }
 }
@@ -218,8 +218,7 @@ extension CodeMirrorWebView: WKNavigationDelegate {
 // MARK: WKScriptMessageHandler
 
 extension CodeMirrorWebView: WKScriptMessageHandler {
-
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
 
         // is Ready
         if message.name == Constants.codeMirrorDidReady {
