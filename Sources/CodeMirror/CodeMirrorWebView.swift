@@ -114,7 +114,7 @@ public final class CodeMirrorWebView: NativeView {
         callJavascript(javascriptString: "SetMimeType(\"\(value)\");")
     }
 
-    public func setThemeName(_ value: Bool) {
+    public func setThemeName(_ value: String) {
         callJavascript(javascriptString: "SetTheme(\"\(value)\");")
     }
 
