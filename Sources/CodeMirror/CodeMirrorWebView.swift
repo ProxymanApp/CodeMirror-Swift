@@ -36,14 +36,16 @@ public protocol CodeMirrorWebViewDelegate: AnyObject {
 
 // JS Func
 public typealias JavascriptCallback = (Result<Any?, Error>) -> Void
-private struct JavascriptFunction {
+public struct JavascriptFunction {
 
     let functionString: String
+    let argments: [String: Any]? // Only use for macOS 10.11 with modern APIs
     let callback: JavascriptCallback?
 
-    init(functionString: String, callback: JavascriptCallback? = nil) {
+    init(functionString: String, argments: [String: Any]?, callback: JavascriptCallback?) {
         self.functionString = functionString
         self.callback = callback
+        self.argments = argments
     }
 }
 
@@ -56,9 +58,56 @@ public final class CodeMirrorWebView: NativeView {
         static let codeMirrorTextContentDidChange = "codeMirrorTextContentDidChange"
     }
 
+    public enum BeautifyMode {
+        case html
+        case js
+        case css
+        case none
+
+        var toJSCode: String {
+            // Use string boolean by intention
+            var isHexValue = "true"
+            if #available(OSX 11.2, *) {
+                // In Big Sur, we directly pass the value to the func call
+                isHexValue = "false"
+            } else {
+                // Catalina and pior, we need to convert to Hex
+                // To prevent Invalid escape string in the body
+                isHexValue = "true"
+            }
+            switch self {
+            case .css:
+                return "BeautifyCSS(content, \(isHexValue));"
+            case .html:
+                return "BeautifyHTML(content, \(isHexValue));"
+            case .js:
+                return "BeautifyJS(content, \(isHexValue));"
+            case .none:
+                return "SetContent(content, \(isHexValue));"
+            }
+        }
+    }
+
+    public enum AutoCompleteMode {
+        case httpMessage
+        case scripting
+
+        func toJSCmd(isEnabled: Bool) -> String {
+            switch self {
+            case .httpMessage:
+                return "SetEnableHTTPMessageAutoComplete(\(isEnabled));"
+            case .scripting:
+                return "SetEnableScriptingAutoComplete(\(isEnabled));"
+            }
+        }
+    }
+
     // MARK: Variables
 
-    public weak var delegate: CodeMirrorWebViewDelegate?
+    weak var delegate: CodeMirrorWebViewDelegate?
+    var onLoaded: (() -> Void)?
+    var onProcessing: ((Bool) -> Void)?
+
     private lazy var webview: WKWebView = {
         let preferences = WKPreferences()
         preferences.javaScriptEnabled = true
@@ -70,25 +119,24 @@ public final class CodeMirrorWebView: NativeView {
         configuration.userContentController = userController
         let webView = WKWebView(frame: bounds, configuration: configuration)
         webView.navigationDelegate = self
-        webView.setValue(false, forKey: "drawsBackground") // Prevent white flick
+        webView.setValue(false, forKey: "drawsBackground")
         return webView
     }()
 
     private var pageLoaded = false
     private var pendingFunctions = [JavascriptFunction]()
+    private let queue = DispatchQueue(label: "com.proxyman.CodeMirrorWebView", qos: .default)
 
     // MARK: Init
 
-    override init(frame frameRect: NSRect) {
+    override init(frame frameRect: CGRect) {
         super.init(frame: frameRect)
         initWebView()
-        configCodeMirror()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         initWebView()
-        configCodeMirror()
     }
 
     // MARK: Properties
@@ -97,13 +145,64 @@ public final class CodeMirrorWebView: NativeView {
         callJavascript(javascriptString: "SetTabInsertSpaces(\(value));")
     }
 
-    public func setContent(_ value: String) {
-        if let hexString = value.data(using: .utf8)?.hexEncodedString() {
-            let script = """
-            var content = "\(hexString)"; SetContent(content);
-            """
-            callJavascript(javascriptString: script)
+    public func setContent(_ value: String, beautifyMode: BeautifyMode = .none) {
+        onProcessing?(true)
+
+        // Get setContent JS
+        let setContentCmd = beautifyMode.toJSCode
+
+        // Execute JS
+        if #available(OSX 11.2, *) {
+            //
+            // Use modern APIs
+            // pass the value as a argment
+            // It means we don't need to convert to Hex value anymore
+            //
+            callJavascript(javascriptString: setContentCmd, argments: ["content": value]) {[weak self] (_) in
+                guard let strongSelf = self else { return }
+                strongSelf.onProcessing?(false)
+            }
+        } else {
+            //
+            // It's tricky to pass FULL JSON or HTML text with \n or "", ... into JS Bridge
+            // And use String.raw`content_goes_here`
+            // Update 1: String.raw`` doesn't work anymore if the content has `${}` string
+            //
+            // Reasonable solution is that we convert to hex, then converting back to string in JS
+            //
+
+            queue.async {
+                if let hexString = value.data(using: .utf8)?.hexEncodedString() {
+                    let script = """
+                    var content = "\(hexString)"; \(setContentCmd);
+                    """
+                    DispatchQueue.main.async {[weak self] in
+                        guard let strongSelf = self else { return }
+                        strongSelf.callJavascript(javascriptString: script) { _ in
+                            strongSelf.onProcessing?(false)
+                        }
+                    }
+
+                } else {
+                    let script = """
+                    var content = "Couldn't convert to UTF8 Text"; SetContent(content);
+                    """
+                    DispatchQueue.main.async {[weak self] in
+                        guard let strongSelf = self else { return }
+                        strongSelf.callJavascript(javascriptString: script) { _ in
+                            strongSelf.onProcessing?(false)
+                        }
+                    }
+                }
+            }
         }
+    }
+
+    public func clearContent() {
+        let script = """
+        SetContent("");
+        """
+        callJavascript(javascriptString: script)
     }
 
     public func getContent(_ block: JavascriptCallback?) {
@@ -111,11 +210,16 @@ public final class CodeMirrorWebView: NativeView {
     }
 
     public func setMimeType(_ value: String) {
-        callJavascript(javascriptString: "SetMimeType(\"\(value)\");")
+        var newType = value
+        if value.hasPrefix("application/json") {
+            newType = "application/ld+json"
+        }
+        callJavascript(javascriptString: "SetMimeType(\"\(newType)\");")
     }
 
-    public func setThemeName(_ value: String) {
-        callJavascript(javascriptString: "SetTheme(\"\(value)\");")
+    public func setDarkTheme(_ isDark: Bool) {
+        let themeName = isDark ? "material" : "base16-light"
+        callJavascript(javascriptString: "SetTheme(\"\(themeName)\");")
     }
 
     public func setLineWrapping(_ value: Bool) {
@@ -137,6 +241,25 @@ public final class CodeMirrorWebView: NativeView {
     public func getTextSelection(_ block: JavascriptCallback?) {
         callJavascript(javascriptString: "GetTextSelection();", callback: block)
     }
+
+    public func toggleFilterBar() {
+        callJavascript(javascriptString: "ToggleFilterBar();")
+    }
+
+    public func setIsEnabledForAutoComplete(autoComplete: AutoCompleteMode, isEnabled: Bool) {
+        callJavascript(javascriptString: autoComplete.toJSCmd(isEnabled: isEnabled))
+    }
+
+    // MARK: Private
+
+    private func callJavascript(javascriptString: String, argments: [String: Any]? = nil, callback: JavascriptCallback? = nil) {
+        if pageLoaded {
+            callJavascriptFunction(function: JavascriptFunction(functionString: javascriptString, argments: argments, callback: callback))
+        }
+        else {
+            addFunction(function: JavascriptFunction(functionString: javascriptString, argments: argments, callback: callback))
+        }
+    }
 }
 
 // MARK: Private
@@ -144,7 +267,6 @@ public final class CodeMirrorWebView: NativeView {
 extension CodeMirrorWebView {
 
     private func initWebView() {
-        webview.allowsMagnification = false
         webview.translatesAutoresizingMaskIntoConstraints = false
         addSubview(webview)
         webview.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
@@ -163,21 +285,37 @@ extension CodeMirrorWebView {
         webview.load(data, mimeType: "text/html", characterEncodingName: "utf-8", baseURL: bundle.resourceURL!)
     }
 
-    private func configCodeMirror() {
-        setTabInsertsSpaces(true)
-    }
-
     private func addFunction(function:JavascriptFunction) {
         pendingFunctions.append(function)
     }
 
     private func callJavascriptFunction(function: JavascriptFunction) {
+
+        // If the argment is available, it means we would use a modern API
+        if let argments = function.argments {
+
+            // Only available in 11.2
+            // User 11.0.1 has a lot of crashes
+            // https://bugs.webkit.org/show_bug.cgi?id=208593
+            if #available(OSX 11.2, iOS 14.0, *) {
+                webview.callAsyncJavaScript(function.functionString, arguments: argments, in: nil, in: .page) {(result) in
+                    switch result {
+                    case .failure(let error):
+                        function.callback?(Result<Any?, Error>.failure(error))
+                    case .success(let data):
+                        function.callback?(Result<Any?, Error>.success(data))
+                    }
+                }
+                return
+            }
+        }
+
+        // Legacy for back compatible
         webview.evaluateJavaScript(function.functionString) { (response, error) in
             if let error = error {
-                function.callback?(.failure(error))
-            }
-            else {
-                function.callback?(.success(response))
+                function.callback?(Result<Any?, Error>.failure(error))
+            } else {
+                function.callback?(Result<Any?, Error>.success(response))
             }
         }
     }
@@ -187,15 +325,6 @@ extension CodeMirrorWebView {
             callJavascriptFunction(function: function)
         }
         pendingFunctions.removeAll()
-    }
-
-    private func callJavascript(javascriptString: String, callback: JavascriptCallback? = nil) {
-        if pageLoaded {
-            callJavascriptFunction(function: JavascriptFunction(functionString: javascriptString, callback: callback))
-        }
-        else {
-            addFunction(function: JavascriptFunction(functionString: javascriptString, callback: callback))
-        }
     }
 }
 

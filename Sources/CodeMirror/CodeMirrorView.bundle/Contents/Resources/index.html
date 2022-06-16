@@ -1,31 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="codemirror.css">
-    <script src="codemirror.js"></script>
+      <meta charset="utf-8" />
+      <link rel="stylesheet" href="codemirror.css" />
+      <script src="codemirror.js"></script>
 
-    <link rel="stylesheet" href="addons/dialog/dialog.css">
-    <script src="addons/dialog/dialog.js"></script>
-    <script src="addons/search/jump-to-line.js"></script>
-    <script src="addons/search/match-highlighter.js"></script>
-    <script src="addons/search/search.js"></script>
-    <script src="addons/search/searchcursor.js"></script>
-    <script src="addons/fold/foldcode.js"></script>
-    <script src="addons/fold/foldgutter.js"></script>
-    <script src="addons/fold/brace-fold.js"></script>
-    <script src="addons/fold/xml-fold.js"></script>
-    <script src="addons/fold/indent-fold.js"></script>
-    <script src="addons/fold/comment-fold.js"></script>
-    <script src="addons/selection/active-line.js"></script>
-    <script src="addons/edit/closebrackets.js"></script>
-    <script src="addons/comment/comment.js"></script>
+      <link rel="stylesheet" href="addons/dialog/dialog.css" />
+      <script src="addons/dialog/dialog.js"></script>
 
-    <link rel="stylesheet" href="addons/fold/foldgutter.css" />
-    <link rel="stylesheet" href="theme/base16-light.css">
-    <link rel="stylesheet" href="theme/material.css">
+      <script src="addons/search/jump-to-line.js"></script>
+      <script src="addons/search/match-highlighter.js"></script>
+      <script src="addons/search/search.js"></script>
+      <script src="addons/search/searchcursor.js"></script>
 
-    <script src="modes/apl.js"></script><script src="modes/asciiarmor.js"></script><script src="modes/asn.1.js"></script><script src="modes/asterisk.js"></script><script src="modes/brainfuck.js"></script><script src="modes/clike.js"></script><script src="modes/clojure.js"></script><script src="modes/cmake.js"></script><script src="modes/cobol.js"></script><script src="modes/coffeescript.js"></script><script src="modes/commonlisp.js"></script><script src="modes/crystal.js"></script><script src="modes/css.js"></script><script src="modes/cypher.js"></script><script src="modes/d.js"></script><script src="modes/dart.js"></script><script src="modes/diff.js"></script><script src="modes/django.js"></script><script src="modes/dockerfile.js"></script><script src="modes/dtd.js"></script><script src="modes/dylan.js"></script><script src="modes/ebnf.js"></script><script src="modes/ecl.js"></script><script src="modes/eiffel.js"></script><script src="modes/elm.js"></script><script src="modes/erlang.js"></script><script src="modes/factor.js"></script><script src="modes/fcl.js"></script><script src="modes/forth.js"></script><script src="modes/fortran.js"></script><script src="modes/gas.js"></script><script src="modes/gfm.js"></script><script src="modes/gherkin.js"></script><script src="modes/go.js"></script><script src="modes/groovy.js"></script><script src="modes/haml.js"></script><script src="modes/handlebars.js"></script><script src="modes/haskell.js"></script><script src="modes/haskell-literate.js"></script><script src="modes/haxe.js"></script><script src="modes/htmlembedded.js"></script><script src="modes/htmlmixed.js"></script><script src="modes/http.js"></script><script src="modes/idl.js"></script><script src="modes/javascript.js"></script><script src="modes/jinja2.js"></script><script src="modes/jsx.js"></script><script src="modes/julia.js"></script><script src="modes/livescript.js"></script><script src="modes/lua.js"></script><script src="modes/markdown.js"></script><script src="modes/mathematica.js"></script><script src="modes/mbox.js"></script><script src="modes/mirc.js"></script><script src="modes/mllike.js"></script><script src="modes/modelica.js"></script><script src="modes/mscgen.js"></script><script src="modes/mumps.js"></script><script src="modes/nginx.js"></script><script src="modes/nsis.js"></script><script src="modes/ntriples.js"></script><script src="modes/octave.js"></script><script src="modes/oz.js"></script><script src="modes/pascal.js"></script><script src="modes/pegjs.js"></script><script src="modes/perl.js"></script><script src="modes/php.js"></script><script src="modes/pig.js"></script><script src="modes/powershell.js"></script><script src="modes/properties.js"></script><script src="modes/protobuf.js"></script><script src="modes/pug.js"></script><script src="modes/puppet.js"></script><script src="modes/python.js"></script><script src="modes/q.js"></script><script src="modes/r.js"></script><script src="modes/rpm.js"></script><script src="modes/rst.js"></script><script src="modes/ruby.js"></script><script src="modes/rust.js"></script><script src="modes/sas.js"></script><script src="modes/sass.js"></script><script src="modes/scheme.js"></script><script src="modes/shell.js"></script><script src="modes/sieve.js"></script><script src="modes/slim.js"></script><script src="modes/smalltalk.js"></script><script src="modes/smarty.js"></script><script src="modes/solr.js"></script><script src="modes/soy.js"></script><script src="modes/sparql.js"></script><script src="modes/spreadsheet.js"></script><script src="modes/sql.js"></script><script src="modes/stex.js"></script><script src="modes/stylus.js"></script><script src="modes/swift.js"></script><script src="modes/tcl.js"></script><script src="modes/textile.js"></script><script src="modes/tiddlywiki.js"></script><script src="modes/tiki.js"></script><script src="modes/toml.js"></script><script src="modes/tornado.js"></script><script src="modes/troff.js"></script><script src="modes/ttcn.js"></script><script src="modes/ttcn-cfg.js"></script><script src="modes/turtle.js"></script><script src="modes/twig.js"></script><script src="modes/vb.js"></script><script src="modes/vbscript.js"></script><script src="modes/velocity.js"></script><script src="modes/verilog.js"></script><script src="modes/vhdl.js"></script><script src="modes/vue.js"></script><script src="modes/webidl.js"></script><script src="modes/xml.js"></script><script src="modes/xquery.js"></script><script src="modes/yacas.js"></script><script src="modes/yaml.js"></script><script src="modes/yaml-frontmatter.js"></script><script src="modes/z80.js"></script>
+      <script src="addons/fold/foldcode.js"></script>
+      <script src="addons/fold/foldgutter.js"></script>
+      <script src="addons/fold/brace-fold.js"></script>
+      <script src="addons/fold/xml-fold.js"></script>
+      <script src="addons/fold/indent-fold.js"></script>
+      <script src="addons/fold/comment-fold.js"></script>
+      <script src="addons/selection/active-line.js"></script>
+      <script src="addons/edit/closebrackets.js"></script>
+
+      <script src="addons/hint/show-hint.js"></script>
+      <script src="addons/hint/anyword-hint.js"></script>
+      <link rel="stylesheet" href="addons/hint/show-hint.css" />
+
+      <link rel="stylesheet" href="addons/fold/foldgutter.css" />
+
+      <script src="addons/comment/comment.js"></script>
+      <link rel="stylesheet" href="theme/base16-light.css" />
+      <link rel="stylesheet" href="theme/material.css" />
+
+      <script src="beautify-css.min.js"></script>
+      <script src="beautify-html.min.js"></script>
+      <script src="beautify.min.js"></script>
+
+      <script src="modes/apl.js"></script>
+      <script src="modes/asciiarmor.js"></script>
+      <script src="modes/asn.1.js"></script>
+      <script src="modes/asterisk.js"></script>
+      <script src="modes/brainfuck.js"></script>
+      <script src="modes/clike.js"></script>
+      <script src="modes/clojure.js"></script>
+      <script src="modes/cmake.js"></script>
+      <script src="modes/cobol.js"></script>
+      <script src="modes/coffeescript.js"></script>
+      <script src="modes/commonlisp.js"></script>
+      <script src="modes/crystal.js"></script>
+      <script src="modes/css.js"></script>
+      <script src="modes/cypher.js"></script>
+      <script src="modes/d.js"></script>
+      <script src="modes/dart.js"></script>
+      <script src="modes/diff.js"></script>
+      <script src="modes/django.js"></script>
+      <script src="modes/dockerfile.js"></script>
+      <script src="modes/dtd.js"></script>
+      <script src="modes/dylan.js"></script>
+      <script src="modes/ebnf.js"></script>
+      <script src="modes/ecl.js"></script>
+      <script src="modes/eiffel.js"></script>
+      <script src="modes/elm.js"></script>
+      <script src="modes/erlang.js"></script>
+      <script src="modes/factor.js"></script>
+      <script src="modes/fcl.js"></script>
+      <script src="modes/forth.js"></script>
+      <script src="modes/fortran.js"></script>
+      <script src="modes/gas.js"></script>
+      <script src="modes/gfm.js"></script>
+      <script src="modes/gherkin.js"></script>
+      <script src="modes/go.js"></script>
+      <script src="modes/groovy.js"></script>
+      <script src="modes/haml.js"></script>
+      <script src="modes/handlebars.js"></script>
+      <script src="modes/haskell.js"></script>
+      <script src="modes/haskell-literate.js"></script>
+      <script src="modes/haxe.js"></script>
+      <script src="modes/htmlembedded.js"></script>
+      <script src="modes/htmlmixed.js"></script>
+      <script src="modes/http.js"></script>
+      <script src="modes/idl.js"></script>
+      <script src="modes/javascript.js"></script>
+      <script src="modes/jinja2.js"></script>
+      <script src="modes/jsx.js"></script>
+      <script src="modes/julia.js"></script>
+      <script src="modes/livescript.js"></script>
+      <script src="modes/lua.js"></script>
+      <script src="modes/markdown.js"></script>
+      <script src="modes/mathematica.js"></script>
+      <script src="modes/mbox.js"></script>
+      <script src="modes/mirc.js"></script>
+      <script src="modes/mllike.js"></script>
+      <script src="modes/modelica.js"></script>
+      <script src="modes/mscgen.js"></script>
+      <script src="modes/mumps.js"></script>
+      <script src="modes/nginx.js"></script>
+      <script src="modes/nsis.js"></script>
+      <script src="modes/ntriples.js"></script>
+      <script src="modes/octave.js"></script>
+      <script src="modes/oz.js"></script>
+      <script src="modes/pascal.js"></script>
+      <script src="modes/pegjs.js"></script>
+      <script src="modes/perl.js"></script>
+      <script src="modes/php.js"></script>
+      <script src="modes/pig.js"></script>
+      <script src="modes/powershell.js"></script>
+      <script src="modes/properties.js"></script>
+      <script src="modes/protobuf.js"></script>
+      <script src="modes/pug.js"></script>
+      <script src="modes/puppet.js"></script>
+      <script src="modes/python.js"></script>
+      <script src="modes/q.js"></script>
+      <script src="modes/r.js"></script>
+      <script src="modes/rpm.js"></script>
+      <script src="modes/rst.js"></script>
+      <script src="modes/ruby.js"></script>
+      <script src="modes/rust.js"></script>
+      <script src="modes/sas.js"></script>
+      <script src="modes/sass.js"></script>
+      <script src="modes/scheme.js"></script>
+      <script src="modes/shell.js"></script>
+      <script src="modes/sieve.js"></script>
+      <script src="modes/slim.js"></script>
+      <script src="modes/smalltalk.js"></script>
+      <script src="modes/smarty.js"></script>
+      <script src="modes/solr.js"></script>
+      <script src="modes/soy.js"></script>
+      <script src="modes/sparql.js"></script>
+      <script src="modes/spreadsheet.js"></script>
+      <script src="modes/sql.js"></script>
+      <script src="modes/stex.js"></script>
+      <script src="modes/stylus.js"></script>
+      <script src="modes/swift.js"></script>
+      <script src="modes/tcl.js"></script>
+      <script src="modes/textile.js"></script>
+      <script src="modes/tiddlywiki.js"></script>
+      <script src="modes/tiki.js"></script>
+      <script src="modes/toml.js"></script>
+      <script src="modes/tornado.js"></script>
+      <script src="modes/troff.js"></script>
+      <script src="modes/ttcn.js"></script>
+      <script src="modes/ttcn-cfg.js"></script>
+      <script src="modes/turtle.js"></script>
+      <script src="modes/twig.js"></script>
+      <script src="modes/vb.js"></script>
+      <script src="modes/vbscript.js"></script>
+      <script src="modes/velocity.js"></script>
+      <script src="modes/verilog.js"></script>
+      <script src="modes/vhdl.js"></script>
+      <script src="modes/vue.js"></script>
+      <script src="modes/webidl.js"></script>
+      <script src="modes/xml.js"></script>
+      <script src="modes/xquery.js"></script>
+      <script src="modes/yacas.js"></script>
+      <script src="modes/yaml.js"></script>
+      <script src="modes/yaml-frontmatter.js"></script>
+      <script src="modes/z80.js"></script>
   </head>
   <style>
 
@@ -42,132 +172,587 @@
     }
 
   </style>
-  <body>
+  <body spellcheck="false" autocorrect="false" autocapitalize="false">
     <script>
+        // https://www.npmjs.com/package/codemirror-minified
+        // CodeMirror Build 5.63.0
 
-<!--        https://www.npmjs.com/package/codemirror-minified-->
-<!--        CodeMirror Build 5.52.2-->
+        // Future Note
+        // Remove `clearSearch(cm);` in search.js
+        // It's important to persist the search bar when it's closed
+        // https://github.com/ProxymanApp/Proxyman/issues/984
+        // https://github.com/codemirror/CodeMirror/blob/5.52.2/addon/search/search.js#L252
 
-      CodeMirror.keyMap["default"]["Cmd-/"] = "toggleComment";  // Add-on
+        CodeMirror.keyMap["default"]["Cmd-/"] = "toggleComment"; // Add-on
 
-      var editor = CodeMirror(document.body, {
-        lineNumbers: true,
-        autofocus: true,
-        mode: "text/html",
-        theme: "material",
-        foldGutter: true,
-        tabSize: 2,
-        indentUnit: 2,
-        lineWrapping: true,
-        readOnly: false,
-        autoCloseBrackets: true,
-        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-        extraKeys: {"Cmd-F": "findPersistent"},
-        styleActiveLine: true
-      });
-      editor.on("change", function(instance, change) {
-          var content = GetContent();
-          window.webkit.messageHandlers.codeMirrorTextContentDidChange.postMessage(content);
-      });
+        /////////////////////////////////////
+        // Auto Complete: AnyWord + HTTP Message + Scripting
+        // It looks stupid, but it works.
+        // TODO: Decoupling the Auto Complete logic into a different file
+        /////////////////////////////////////
 
-      function SupportedMimeTypes() {
-        return Object.keys(CodeMirror.mimeModes).join(",");
-      }
+        var isHTTPMEssageAutoCompleteEnabled = false;
+        var isScriptingAutoCompleteEnabled = false;
 
-      function SetMimeType(type) {
-        editor.setOption("mode", type);
-      }
+        var httpMessageDictionary = [
+          "Accept",
+          "Accept-CH",
+          "Accept-Charset",
+          "Accept-Encoding",
+          "Accept-Language",
+          "Accept-Ranges",
+          "Access-Control-Allow-Credentials",
+          "Access-Control-Allow-Headers",
+          "Access-Control-Allow-Methods",
+          "Access-Control-Allow-Origin",
+          "Access-Control-Expose-Headers",
+          "Access-Control-Max-Age",
+          "Access-Control-Request-Headers",
+          "Access-Control-Request-Method",
+          "Age",
+          "Authorization",
+          "Cache-Control",
+          "Connection",
+          "Content-Disposition",
+          "Content-Encoding",
+          "Content-Language",
+          "Content-Length",
+          "Content-Location",
+          "Content-MD5",
+          "Content-Range",
+          "Content-Type",
+          "Cookie",
+          "Cross-Origin-Embedder-Policy",
+          "Cross-Origin-Opener-Policy",
+          "Cross-Origin-Resource-Policy",
+          "Date",
+          "ETag",
+          "Early-Data",
+          "Expect",
+          "Expires",
+          "From",
+          "Host",
+          "If-Match",
+          "If-Modified-Since",
+          "If-None-Match",
+          "If-Range",
+          "If-Unmodified-Since",
+          "Keep-Alive",
+          "Last-Modified",
+          "Link",
+          "Location",
+          "Origin",
+          "Pragma",
+          "Proxy-Authenticate",
+          "Proxy-Authorization",
+          "Range",
+          "Referer",
+          "Referrer-Policy",
+          "Report-To",
+          "Retry-After",
+          "Sec-Fetch-Dest",
+          "Sec-Fetch-Mode",
+          "Sec-Fetch-Site",
+          "Sec-Fetch-User",
+          "Sec-WebSocket-Accept",
+          "Sec-WebSocket-Extensions",
+          "Sec-WebSocket-Key",
+          "Sec-WebSocket-Protocol",
+          "Sec-WebSocket-Version",
+          "Server",
+          "Server-Timing",
+          "Set-Cookie",
+          "Strict-Transport-Security",
+          "Transfer-Encoding",
+          "Upgrade",
+          "User-Agent",
+          "Vary",
+          "Via",
+          "WWW-Authenticate",
+          "*/*",
+          "Origin",
+          "application/*",
+          "application/gzip",
+          "application/json",
+          "application/ld+json",
+          "application/pdf",
+          "application/x-protobuf",
+          "application/x-www-form-urlencoded",
+          "application/xml",
+          "application/zip",
+          "audio/mpeg",
+          "audio/wav",
+          "charset=utf-8",
+          "close",
+          "cors",
+          "deflate",
+          "empty",
+          "en-US",
+          "gzip",
+          "deflate",
+          "iamge/*",
+          "image/gif",
+          "image/jpeg",
+          "image/png",
+          ,
+          "keep-alive",
+          "max-age",
+          "no-cache",
+          "same-origin",
+          "text/*",
+          "text/html",
+          "text/javascript",
+          "text/plain",
+          "utf-8",
+        ];
 
-      function GetMimeType(type) {
-        return editor.getOption("mode");
-      }
+        var scriptingDictionary = [
+          "headers",
+          "context",
+          "url",
+          "delete",
+          "queries",
+          "body",
+          "scheme",
+          "host",
+          "port",
+          "path",
+          "http",
+          "https",
+          "method",
+          "statusCode",
+          "bodyFilePath",
+          "includes",
+          "sharedState",
+          "preserveHostHeader",
+          "comment",
+          "color",
+          "red",
+          "blue",
+          "yellow",
+          "purple",
+          "gray",
+          "green",
+          "console.log",
+          "sleep",
+          "writeToFile",
+          "replace",
+          "rawBody",
+          "GET",
+          "POST",
+          "UPDATE",
+          "DELETE",
+          "PUT",
+        ];
 
-      function SetLineWrapping(wrapping) {
-        editor.setOption("lineWrapping", wrapping);
-      }
+        var statusCodeDict = [
+          "HTTP/1.1",
+          "100 Continue",
+          "101 Switching Protocols",
+          "102 Processing",
+          "200 OK",
+          "201 Created",
+          "202 Accepted",
+          "203 Non-Authoritative Information",
+          "204 No Content",
+          "205 Reset Content",
+          "206 Partial Content",
+          "207 Multi-Status",
+          "208 Already Reported",
+          "226 IM Used",
+          "300 Multiple Choices",
+          "301 Moved Permanently",
+          "302 Found",
+          "303 See Other",
+          "304 Not Modified",
+          "305 Use Proxy",
+          "307 Temporary Redirect",
+          "308 Permanent Redirect",
+          "400 Bad Request",
+          "401 Unauthorized",
+          "402 Payment Required",
+          "403 Forbidden",
+          "404 Not Found",
+          "405 Method Not Allowed",
+          "406 Not Acceptable",
+          "407 Proxy Authentication Required",
+          "408 Request Timeout",
+          "409 Conflict",
+          "410 Gone",
+          "411 Length Required",
+          "412 Precondition Failed",
+          "413 Payload Too Large",
+          "414 URI Too Long",
+          "415 Unsupported Media Type",
+          "416 Range Not Satisfiable",
+          "417 Expectation Failed",
+          "421 Misdirected Request",
+          "422 Unprocessable Entity",
+          "423 Locked",
+          "424 Failed Dependency",
+          "426 Upgrade Required",
+          "428 Precondition Required",
+          "429 Too Many Requests",
+          "431 Request Header Fields Too Large",
+          "451 Unavailable For Legal Reasons",
+          "500 Internal Server Error",
+          "501 Not Implemented",
+          "502 Bad Gateway",
+          "503 Service Unavailable",
+          "504 Gateway Timeout",
+          "505 HTTP Version Not Supported",
+          "506 Variant Also Negotiates",
+          "507 Insufficient Storage",
+          "508 Loop Detected",
+          "510 Not Extended",
+          "511 Network Authentication Required",
+          "555 User-Defined Resource Error",
+        ];
 
-      function SetReadOnly(readOnly) {
-          editor.setOption("readOnly", readOnly);
-      }
+        var orig = CodeMirror.hint.anyword;
 
-      function GetLineWrapping() {
-        return editor.getOption("lineWrapping");
-      }
-
-      function SetIndentUnit(unit) {
-        editor.setOption("indentUnit", unit);
-      }
-
-      function SetTheme(text) {
-        editor.setOption("theme", text);
-      }
-
-      function GetIndentUnit() {
-        return editor.getOption("indentUnit");
-      }
-
-      function GetReadOnly() {
-          return editor.getOption("readOnly");
-      }
-
-      function SetTabSize(size) {
-        editor.setOption("tabSize", size);
-      }
-
-      function GetTabSize() {
-        return editor.getOption("tabSize");
-      }
-
-      function SetTabInsertSpaces(flag) {
-        // See http://codemirror.net/doc/manual.html#keymaps
-        if (flag) {
-          CodeMirror.keyMap["basic"]["Tab"] = function(cm) {
-            var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
-            cm.replaceSelection(spaces, "end", "+input");
+        // Override anyword method
+        // For some reason, registerHelper("hint", "rawmessage", func) doesn't work???
+        //
+        CodeMirror.hint.anyword = function (editor) {
+          // Any word auto-complete
+          var inner = orig(editor) || {
+            from: editor.getCursor(),
+            to: editor.getCursor(),
+            list: [],
           };
-        } else {
-          CodeMirror.keyMap["basic"]["Tab"] = "defaultTab";
+
+          // Addons
+          if (
+            isHTTPMEssageAutoCompleteEnabled ||
+            isScriptingAutoCompleteEnabled
+          ) {
+            // Find the word fragment near cursor that needs auto-complete...
+            const cursor = editor.getCursor();
+            const currentLine = editor.getLine(cursor.line);
+            let start = cursor.ch;
+            let end = start;
+            const rex = /\w/;
+            // a pattern to match any characters in our hint "words"
+            // Our hints include function calls, e.g. "trap.getSource()"
+            // so we search for word charcters (\w) and periods.
+            // First (and optional), find end of current "word" at cursor...
+            while (end < currentLine.length && rex.test(currentLine.charAt(end)))
+              ++end;
+            // Find beginning of current "word" at cursor...
+            while (start && rex.test(currentLine.charAt(start - 1))) --start;
+            // Grab the current word, if any...
+            var curWord = start !== end && currentLine.slice(start, end);
+
+            if (typeof curWord === "string") {
+              curWord = curWord.toLowerCase();
+              var uniqueSet = new Set(inner.list);
+
+              // Scripting
+              // In the scripting mode, we support HTTP Message and scripts, not staus code
+              if (isScriptingAutoCompleteEnabled) {
+                const suggestions = scriptingDictionary.filter(function (item) {
+                  return item.toLowerCase().indexOf(curWord) >= 0;
+                });
+
+                suggestions.forEach((item) => {
+                  uniqueSet.add(item);
+                });
+
+                const httpSuggestions = httpMessageDictionary.filter(function (item) {
+                  return item.toLowerCase().indexOf(curWord) >= 0;
+                });
+
+                httpSuggestions.forEach((item) => {
+                  uniqueSet.add(item);
+                });
+
+              }
+
+              // HTTP Message Auto Complete
+              if (isHTTPMEssageAutoCompleteEnabled) {
+                const suggestions = httpMessageDictionary.filter(function (item) {
+                  return item.toLowerCase().indexOf(curWord) >= 0;
+                });
+
+                suggestions.forEach((item) => {
+                  uniqueSet.add(item);
+                });
+
+                // Status code
+                const statusCodeSuggestions = statusCodeDict.filter(function (item) {
+                  return item.startsWith(curWord);
+                });
+                statusCodeSuggestions.forEach((item) => {
+                  uniqueSet.add(item);
+                });
+              }
+
+              // Remove duplicated suggestions
+              inner.list = Array.from(uniqueSet);
+            }
+          }
+          return inner;
+        };
+
+        var editor = CodeMirror(document.body, {
+          lineNumbers: true,
+          autofocus: true,
+          mode: "application/ld+json",
+          theme: "material",
+          foldGutter: true,
+          tabSize: 2,
+          indentUnit: 2,
+          lineWrapping: true,
+          readOnly: true,
+          autoCloseBrackets: true,
+          gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+          extraKeys: { "Cmd-F": "findPersistent", "Ctrl-Space": "autocomplete" },
+          styleActiveLine: true,
+          hint: CodeMirror.hint.anyword,
+          spellcheck: false,
+          autocorrect: false,
+          autocapitalize: false,
+        });
+
+        // Show Hint when typing
+        // Except CMD+S, CMD+B, CMD+F and CMD+W
+        // 91 and 93 is CMD Left/Right
+        var previousKey = undefined;
+
+        // Dont' use "Change" event
+        // Because it will trigger when setting a new content,
+        // Difficult to know the change is from User Input or just Update the text
+
+        // For command action, such as CMD+/ for commment
+        editor.on("inputRead", function (instance, change) {
+          notifyTextDidChange();
+        });
+
+        // For keyboard type
+        editor.on("keyHandled", function (instance, name, event) {
+          notifyTextDidChange();
+        });
+
+        SetDefaultStyle();
+
+        function notifyTextDidChange() {
+          var content = GetContent();
+          window.webkit.messageHandlers.codeMirrorTextContentDidChange.postMessage(
+            content
+          );
         }
-      }
 
-      function GetTabInsertSpaces() {
-        return CodeMirror.keyMap["basic"]["Tab"] == "defaultTab";
-      }
+        function SupportedMimeTypes() {
+          return Object.keys(CodeMirror.mimeModes).join(",");
+        }
 
-      function getStringFromHex(content) {
-          return decodeURIComponent(content.replace(/\s+/g, '').replace(/[0-9a-f]{2}/g, '%$&'));
-      }
+        function SetMimeType(type) {
+          editor.setOption("mode", type);
+        }
 
-      function SetContent(content) {
+        function GetMimeType(type) {
+          return editor.getOption("mode");
+        }
+
+        function SetLineWrapping(wrapping) {
+          editor.setOption("lineWrapping", wrapping);
+        }
+
+        function SetReadOnly(readOnly) {
+          editor.setOption("readOnly", readOnly);
+          SetAutoCompleteMode(!readOnly);
+        }
+
+        function SetAutoCompleteMode(enable) {
+          if (enable) {
+            editor.on("keydown", function (cm, event) {
+              if (
+                previousKey != undefined &&
+                (event.key == "s" ||
+                  event.key == "f" ||
+                  event.key == "b" ||
+                  event.key == "w") &&
+                (previousKey.keyCode == 91 || previousKey.keyCode == 93)
+              ) {
+                // Skip
+                // Don't show any hint window
+              } else if (
+                (!event.commandKey &&
+                  event.keyCode >= 65 &&
+                  event.keyCode <= 90) ||
+                (event.keyCode >= 97 && event.keyCode <= 122) ||
+                (event.keyCode >= 46 && event.keyCode <= 57)
+              ) {
+                CodeMirror.commands.autocomplete(cm, null, {
+                  completeSingle: false,
+                });
+              } else {
+                previousKey = event;
+              }
+            });
+          } else {
+            editor.on("keydown", null);
+          }
+        }
+
+        function GetLineWrapping() {
+          return editor.getOption("lineWrapping");
+        }
+
+        function SetIndentUnit(unit) {
+          editor.setOption("indentUnit", unit);
+        }
+
+        function SetTheme(text) {
+          editor.setOption("theme", text);
+        }
+
+        function GetIndentUnit() {
+          return editor.getOption("indentUnit");
+        }
+
+        function GetReadOnly() {
+          return editor.getOption("readOnly");
+        }
+
+        function SetTabSize(size) {
+          editor.setOption("tabSize", size);
+        }
+
+        function GetTabSize() {
+          return editor.getOption("tabSize");
+        }
+
+        function SetTabInsertSpaces(flag) {
+          // See http://codemirror.net/doc/manual.html#keymaps
+          if (flag) {
+            CodeMirror.keyMap["basic"]["Tab"] = function (cm) {
+              var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
+              cm.replaceSelection(spaces, "end", "+input");
+            };
+          } else {
+            CodeMirror.keyMap["basic"]["Tab"] = "defaultTab";
+          }
+        }
+
+        function GetTabInsertSpaces() {
+          return CodeMirror.keyMap["basic"]["Tab"] == "defaultTab";
+        }
+
+        function getStringFromHex(content) {
+          return decodeURIComponent(
+            content.replace(/\s+/g, "").replace(/[0-9a-f]{2}/g, "%$&")
+          );
+        }
+
+        function SetContent(content, isHex) {
           // Convert hex utf8 -> utf8 string
-          var text = getStringFromHex(content);
+          if (isHex) {
+            var text = getStringFromHex(content);
+            renderText(text);
+          } else {
+            renderText(content);
+          }
+        }
+
+        function renderText(text) {
           editor.doc.setValue(text);
-      }
+        }
 
-      function GetContent() {
-        return editor.doc.getValue();
-      }
+        function BeautifyHTML(content, isHex) {
+          var uglyText;
+          if (isHex) {
+            uglyText = getStringFromHex(content);
+          } else {
+            uglyText = content;
+          }
 
-      function ClearHistory() {
-        editor.doc.clearHistory();
-        editor.doc.markClean();
-      }
+          var beautifyText = html_beautify(uglyText, { indent_size: 2 });
+          renderText(beautifyText);
+        }
 
-      function IsClean() {
-        return editor.doc.isClean();
-      }
+        function BeautifyCSS(content, isHex) {
+          var uglyText;
+          if (isHex) {
+            uglyText = getStringFromHex(content);
+          } else {
+            uglyText = content;
+          }
+          var beautifyText = css_beautify(uglyText, { indent_size: 2 });
+          renderText(beautifyText);
+        }
 
-      function GetTextSelection() {
-        return editor.getSelection();
-      }
+        function BeautifyJS(content, isHex) {
+          var uglyText;
+          if (isHex) {
+            uglyText = getStringFromHex(content);
+          } else {
+            uglyText = content;
+          }
+          var beautifyText = js_beautify(uglyText, { indent_size: 2 });
+          renderText(beautifyText);
+        }
 
-      function SetFontSize(size) {
-        editor.getWrapperElement().style["font-size"] = size+"px";
-        editor.refresh();
-      }
+        function GetContent() {
+          return editor.doc.getValue();
+        }
 
-      window.webkit.messageHandlers.codeMirrorDidReady.postMessage(null); // Need at lead 1 arg
+        function ClearHistory() {
+          editor.doc.clearHistory();
+          editor.doc.markClean();
+        }
 
+        function IsClean() {
+          return editor.doc.isClean();
+        }
+
+        function GetTextSelection() {
+          return editor.getSelection();
+        }
+
+        function SetFontSize(size) {
+          editor.getWrapperElement().style["font-size"] = size + "px";
+
+          // Adaptive line height
+          if (size >= 28) {
+            editor.getWrapperElement().style["line-height"] = "30px";
+          } else if (size >= 20) {
+            editor.getWrapperElement().style["line-height"] = "25px";
+          } else if (size >= 18) {
+            editor.getWrapperElement().style["line-height"] = "22px";
+          } else if (size >= 14) {
+            editor.getWrapperElement().style["line-height"] = "20px";
+          } else if (size >= 11) {
+            editor.getWrapperElement().style["line-height"] = "18px";
+          } else {
+            editor.getWrapperElement().style["line-height"] = "16px";
+          }
+
+          editor.refresh();
+        }
+
+        function SetDefaultStyle() {
+          // Similar config with VSCode, for better visual
+          var fontName = "Menlo, Monaco, Lucida Console, monospace";
+          editor.getWrapperElement().style["font-family"] = fontName;
+          editor.getWrapperElement().style["line-height"] = "18px";
+          editor.refresh();
+        }
+
+        function ToggleFilterBar() {
+          editor.execCommand("findPersistent");
+        }
+
+        function SetEnableHTTPMessageAutoComplete(isEnabled) {
+          isHTTPMEssageAutoCompleteEnabled = isEnabled;
+        }
+
+        function SetEnableScriptingAutoComplete(isEnabled) {
+          isScriptingAutoCompleteEnabled = isEnabled;
+        }
+
+        window.webkit.messageHandlers.codeMirrorDidReady.postMessage(null); // Need at lead 1 arg
     </script>
   </body>
 </html>

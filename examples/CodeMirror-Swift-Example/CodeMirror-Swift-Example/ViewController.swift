@@ -36,5 +36,6 @@ extension ViewController {
         let content = try! String(contentsOf: url)
         codeMirrorView.setMimeType("application/json")
         codeMirrorView.setContent(content)
+        codeMirrorView.setReadonly(false)
     }
 }
